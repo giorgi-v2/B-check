@@ -1,0 +1,13 @@
+.header_navigation_options {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.header_navigation_option {
+    color: #2D7655;
+    text-decoration: none;
+}
