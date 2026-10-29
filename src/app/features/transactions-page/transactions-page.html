@@ -15,6 +15,10 @@
         <td>{{ transaction.cardName }} · {{ transaction.cardNumberLast4Digets }}</td>
         <td>{{ transaction.amount }}{{ transaction.currency }}</td>
       </tr>
+    } @empty {
+      <tr>
+        <td>No Transactions were found!</td>
+      </tr>
     }
   </tbody>
 </table>
