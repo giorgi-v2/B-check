@@ -79,3 +79,15 @@ A modern light interface with green accents, rounded panels, matching header/foo
 The Figma design includes three screens and navigation/card-reveal interactions. Filtering and financial calculations require application logic.
 
 All displayed financial information is fictional demo data.
+
+# Change log
+
+## Lesson 03
+
+- created 2 pages component `src/app/features/my-card-page` `src/app/features/transactions-page`
+- added switch it chooses components in navigation and currency signs, used event binding for class so elements will have their own colors. `components: navigation, header, app.ts` used `input` and `output` props for it.
+- i'm using <a> so as i cant use `disabled` for it i added accessibility feature in _navigation_ component.
+- used `for` so it can take elements from array by id to render it, used `empty` so if there is no information it can show a message. used in _transactions-page_ component.
+- used `if` so it can choose icons or symbols what it has to add. used in _transactions-page_ component.
+- used `let` to keep method in it. used in _transactions-page_ component.
+- validated _build_ and _start_.
