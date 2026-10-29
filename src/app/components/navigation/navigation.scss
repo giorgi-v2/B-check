@@ -1,13 +1,137 @@
+:host {
+  display: block;
+}
+
 .header_navigation_options {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.header_navigation_links {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
 }
 
 .header_navigation_option {
-    color: #2D7655;
-    text-decoration: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px;
+  border-radius: var(--header-radius);
+  background-color: var(--header-nav-default);
+  color: var(--header-green);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease;
+
+  img {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background-color: var(--header-nav-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--header-green);
+    outline-offset: 3px;
+  }
+}
+
+.header_navigation_option_dashboard {
+  width: 160px;
+  background-color: var(--header-nav-active);
+
+  &:hover {
+    background-color: var(--header-nav-active);
+  }
+}
+
+.header_navigation_option_mycards {
+  width: 112px;
+}
+
+.header_navigation_option_transactions {
+  width: 140px;
+}
+
+.header_account_button {
+  display: flex;
+  flex: 0 0 176px;
+  justify-content: center;
+
+  button {
+    min-height: 44px;
+    padding: 12px 20px;
+    border: 0;
+    border-radius: var(--header-radius);
+    background-color: #fff;
+    color: var(--header-ink);
+    font: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+
+    &:hover {
+      background-color: var(--header-nav-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--header-green);
+      outline-offset: 3px;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .header_account_button {
+    flex-basis: 128px;
+  }
+}
+
+@media (max-width: 760px) {
+  .header_navigation_links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .header_navigation_options {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header_navigation_links {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+  }
+
+  .header_navigation_option {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .header_account_button {
+    flex-basis: auto;
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header_navigation_option,
+  .header_account_button button {
+    transition: none;
+  }
 }

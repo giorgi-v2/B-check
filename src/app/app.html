@@ -1,5 +1,15 @@
 <body>
   <app-header></app-header>
-  <app-dashboard></app-dashboard>
+  @switch (currentRoute) {
+    @case ('dashboard') {
+      <app-dashboard-page></app-dashboard-page>
+    }
+    @case ('my-cards') {
+      <app-my-cards-page></app-my-cards-page>
+    }
+    @case ('transactions') {
+      <app-transactions-page></app-transactions-page>
+    }
+  }
   <app-footer></app-footer>
 </body>

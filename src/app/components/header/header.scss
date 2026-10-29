@@ -1,24 +1,104 @@
-.header_content {
-    display: flex;
-    flex-direction: column;
-    background-color: #DAE4D6;
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/manrope-semibold.ttf') format('truetype');
+}
 
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/nunito-extrabold.ttf') format('truetype');
+}
+
+:host {
+  --header-chrome: #e5ede4;
+  --header-green: #2d7655;
+  --header-ink: #243b30;
+  --header-nav-default: rgb(45 118 85 / 7%);
+  --header-nav-hover: rgb(45 118 85 / 12%);
+  --header-nav-active: rgb(45 118 85 / 18%);
+  --header-radius: 12px;
+
+  display: block;
+  background-color: var(--header-chrome);
+  color: var(--header-ink);
+  font-family: 'Manrope', sans-serif;
+}
+
+.header_content {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 48px);
+  max-width: 1216px;
+  min-height: 96px;
+  margin-inline: auto;
+  padding-block: 24px;
+}
+
+.header_logo {
+  display: flex;
+  flex: 0 0 180px;
+  align-items: center;
+  gap: 8px;
 }
 
 .header_logo_icon {
-    padding-top: 2px;
-    width: 32px;
-    height: 32px;
-    color: #2D7655;
+  display: inline-flex;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--header-radius);
+  background-color: var(--header-green);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
 }
 
-.header_logo{
-    display: flex;
-    font-size: 32px;
-    gap: 6px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    color: #243B30;
+.header_title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 40px;
+  white-space: nowrap;
+}
+
+app-navigation {
+  flex: 0 1 876px;
+  min-width: 0;
+}
+
+@media (max-width: 1100px) {
+  .header_logo {
+    flex-basis: 160px;
+  }
+
+  app-navigation {
+    flex: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .header_content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding-block: 20px;
+  }
+
+  .header_logo {
+    flex-basis: auto;
+  }
+
+  app-navigation {
+    flex-basis: auto;
+  }
 }
