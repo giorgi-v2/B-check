@@ -52,12 +52,8 @@
 
 .header_navigation_option_dashboard {
   width: 160px;
-  background-color: var(--header-nav-active);
-
-  &:hover {
-    background-color: var(--header-nav-active);
-  }
 }
+
 
 .header_navigation_option_mycards {
   width: 112px;
@@ -133,5 +129,13 @@
   .header_navigation_option,
   .header_account_button button {
     transition: none;
+  }
+}
+
+.header_navigation_option--active {
+    background-color: var(--header-nav-active);
+
+  &:hover {
+    background-color: var(--header-nav-active);
   }
 }
