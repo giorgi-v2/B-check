@@ -1,6 +1,8 @@
+@let transactionsCount = transactions.length;
+
 <header class="transactions-header">
   <h1>All transactions</h1>
-  <span class="transactions-count">{{ transactions.length }} results</span>
+  <span class="transactions-count">{{ transactionsCount }} results</span>
 </header>
 
 <table>
@@ -84,5 +86,5 @@
 </table>
 
 <footer class="transactions-footer">
-  Showing {{ transactions.length }} of {{ transactions.length }} transactions
+  Showing {{ transactionsCount }} of {{ transactionsCount }} transactions
 </footer>
