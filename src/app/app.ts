@@ -15,4 +15,8 @@ export class App {
   protected readonly title = signal('b-check-project');
 
   protected currentRoute: 'dashboard' | 'my-cards' | 'transactions' = 'dashboard';
+
+  protected handleCurrentRouteChange(route: 'dashboard' | 'my-cards' | 'transactions') {
+    this.currentRoute = route;
+  }
 }

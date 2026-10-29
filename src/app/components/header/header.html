@@ -4,6 +4,9 @@
       <span class="header_logo_icon" aria-hidden="true">✓</span>
       <span class="header_title">B-Check</span>
     </div>
-    <app-navigation></app-navigation>
+    <app-navigation
+      [currentRoute]="currentRoute"
+      (onCurrentRouteChange)="onCurrentRouteChange.emit($event)"
+    ></app-navigation>
   </div>
 </header>

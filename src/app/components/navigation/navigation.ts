@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './navigation.scss',
   templateUrl: './navigation.html',
 })
-export class Navigation {}
+export class Navigation {
+  @Input()
+  public currentRoute: 'dashboard' | 'my-cards' | 'transactions' = 'dashboard';
+  @Output()
+  public onCurrentRouteChange = new EventEmitter<'dashboard' | 'my-cards' | 'transactions'>();
+}
