@@ -1,1 +1,20 @@
-<p>transactions-page works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Transaction</th>
+      <th>Date</th>
+      <th>Card</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (transaction of transactions; track transaction.id) {
+      <tr>
+        <td>{{ transaction.place }}{{ transaction.category }} · {{ transaction.status }}</td>
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.cardName }} · {{ transaction.cardNumberLast4Digets }}</td>
+        <td>{{ transaction.amount }}{{ transaction.currency }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
