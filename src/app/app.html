@@ -1,8 +1,8 @@
-<body>
-  <app-header
-    [currentRoute]="currentRoute"
-    (onCurrentRouteChange)="handleCurrentRouteChange($event)"
-  ></app-header>
+<app-header
+  [currentRoute]="currentRoute"
+  (onCurrentRouteChange)="handleCurrentRouteChange($event)"
+></app-header>
+<main class="app-main">
   @switch (currentRoute) {
     @case ('dashboard') {
       <app-dashboard-page></app-dashboard-page>
@@ -14,5 +14,5 @@
       <app-transactions-page></app-transactions-page>
     }
   }
-  <app-footer></app-footer>
-</body>
+</main>
+<app-footer></app-footer>

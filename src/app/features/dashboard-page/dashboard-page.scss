@@ -1,31 +1,41 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .content {
-    background-color: #EAF2E9;
-    height: 85vh;
+  flex: 1;
+  background-color: var(--color-positive-subtle);
 }
 
 .content_cards {
-    padding-left: 48px;
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
+  padding-inline: clamp(16px, 4vw, 48px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .content_card {
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    border: 1px solid black;
-    border-radius: 16px;
-    width: 300px;
-    height: 150px;
-    background-color: #FFFFFF;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  width: 300px;
+  max-width: 100%;
+  min-height: 150px;
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  text-align: center;
 }
 
 .content_container_title {
-    margin: 0;
+  margin: 0;
 }
 
 .bigButton {
-    padding: 32px;
+  padding: 32px;
 }
