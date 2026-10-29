@@ -4,7 +4,7 @@ interface Transaction {
   id: number;
   place?: string;
   type: 'income' | 'outcome';
-  category?: 'products' | 'health' | 'transport';
+  category?: 'products' | 'health' | 'transport' | 'salary' | 'transfer';
   amount: number;
   currency: 'USD' | 'EUR' | 'GEL';
   date: Date;
@@ -24,6 +24,7 @@ export class TransactionsPage {
     {
       id: 1,
       type: 'income',
+      category: 'transfer',
       amount: 200,
       currency: 'USD',
       date: new Date(2026, 9, 12, 8, 45, 20),
@@ -56,4 +57,11 @@ export class TransactionsPage {
       cardNumberLast4Digets: '0090',
     },
   ];
+  protected formatDate(date: Date) {
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  }
 }

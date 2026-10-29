@@ -10,14 +10,65 @@
   <tbody>
     @for (transaction of transactions; track transaction.id) {
       <tr>
-        <td>{{ transaction.place }}{{ transaction.category }} · {{ transaction.status }}</td>
-        <td>{{ transaction.date }}</td>
-        <td>{{ transaction.cardName }} · {{ transaction.cardNumberLast4Digets }}</td>
-        <td>{{ transaction.amount }}{{ transaction.currency }}</td>
+        <td>
+          <div class="transaction-cell">
+            <div class="transaction-cell-icon">
+              @if (transaction.type === 'income') {
+                <!--insert SVG for income-->
+              } @else if (transaction.type === 'outcome') {
+                <!--insert SVG for outcome-->
+              } @else {
+                <img src="icons/transactions.svg" alt="" />
+              }
+            </div>
+            <div class="transaction-cell-body">
+              @if (transaction.type === 'outcome') {
+                <div class="transaction-cell-header">
+                  {{ transaction.place }}
+                </div>
+              }
+              <div class="transaction-cell-description">
+                <span>{{ transaction.category }} </span>
+                ·
+                <span>{{ transaction.status }}</span>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="transaction-cell-date">
+          @let formatedDate = formatDate(transaction.date);
+          {{ formatedDate }}
+        </td>
+        <td class="transaction-cell-card">
+          {{ transaction.cardName }} · {{ transaction.cardNumberLast4Digets }}
+        </td>
+        <td
+          class="transaction-cell-amount"
+          [class.transaction-cell-amount-positive]="transaction.type === 'income'"
+          [class.transaction-cell-amount-negative]="transaction.type === 'outcome'"
+        >
+          @if (transaction.type === 'income') {
+            +
+          } @else if (transaction.type === 'outcome') {
+            -
+          }
+          {{ transaction.amount }}
+          @switch (transaction.currency) {
+            @case ('USD') {
+              $
+            }
+            @case ('EUR') {
+              €
+            }
+            @case ('GEL') {
+              ₾
+            }
+          }
+        </td>
       </tr>
     } @empty {
       <tr>
-        <td>No Transactions were found!</td>
+        <td class="transaction-cell-empty" colspan="4">No Transactions were found!</td>
       </tr>
     }
   </tbody>
