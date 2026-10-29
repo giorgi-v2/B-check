@@ -4,6 +4,7 @@
       href="#"
       (click)="onCurrentRouteChange.emit('dashboard')"
       [class.header_navigation_option--active]="currentRoute === 'dashboard'"
+      [attr.aria-disabled]="currentRoute === 'dashboard'"
       class="header_navigation_option header_navigation_option_dashboard"
       aria-current="page"
       ><img src="icons/dashboard.svg" alt="" />Dashboard</a
@@ -12,6 +13,7 @@
       href="#"
       (click)="onCurrentRouteChange.emit('my-cards')"
       [class.header_navigation_option--active]="currentRoute === 'my-cards'"
+      [attr.aria-disabled]="currentRoute === 'my-cards'"
       class="header_navigation_option header_navigation_option_mycards"
       ><img src="icons/card.svg" alt="" />My Cards</a
     >
@@ -19,6 +21,7 @@
       href="#"
       (click)="onCurrentRouteChange.emit('transactions')"
       [class.header_navigation_option--active]="currentRoute === 'transactions'"
+      [attr.aria-disabled]="currentRoute === 'transactions'"
       class="header_navigation_option header_navigation_option_transactions"
       ><img src="icons/transactions.svg" alt="" />Transactions</a
     >
