@@ -1,3 +1,20 @@
+:root {
+  --color-primary: #2d7655;
+  --color-text: #243b30;
+  --color-surface: #fff;
+  --color-chrome: #e5ede4;
+  --color-page: color-mix(in srgb, var(--color-chrome) 45%, var(--color-surface));
+  --color-text-muted: color-mix(in srgb, var(--color-text) 62%, var(--color-surface));
+  --color-border: color-mix(in srgb, var(--color-chrome) 80%, var(--color-text));
+  --color-surface-subtle: color-mix(in srgb, var(--color-chrome) 30%, var(--color-surface));
+  --color-positive: var(--color-primary);
+  --color-negative: #bd5753;
+  --color-positive-subtle: color-mix(in srgb, var(--color-positive) 9%, var(--color-surface));
+  --color-negative-subtle: color-mix(in srgb, var(--color-negative) 9%, var(--color-surface));
+  --font-body: 'Manrope', sans-serif;
+}
+
 body {
-    margin: 0;
+  margin: 0;
+  background-color: var(--color-page);
 }

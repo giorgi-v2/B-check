@@ -1,3 +1,8 @@
+<header class="transactions-header">
+  <h1>All transactions</h1>
+  <span class="transactions-count">{{ transactions.length }} results</span>
+</header>
+
 <table>
   <thead>
     <tr>
@@ -14,9 +19,13 @@
           <div class="transaction-cell">
             <div class="transaction-cell-icon">
               @if (transaction.type === 'income') {
-                <!--insert SVG for income-->
+                <svg class="transaction-icon-income" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="icons/transaction-income.svg#icon" />
+                </svg>
               } @else if (transaction.type === 'outcome') {
-                <!--insert SVG for outcome-->
+                <svg class="transaction-icon-outcome" viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="icons/transaction-outcome.svg#icon" />
+                </svg>
               } @else {
                 <img src="icons/transactions.svg" alt="" />
               }
@@ -73,3 +82,7 @@
     }
   </tbody>
 </table>
+
+<footer class="transactions-footer">
+  Showing {{ transactions.length }} of {{ transactions.length }} transactions
+</footer>

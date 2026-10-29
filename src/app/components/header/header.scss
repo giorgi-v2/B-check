@@ -15,9 +15,9 @@
 }
 
 :host {
-  --header-chrome: #e5ede4;
-  --header-green: #2d7655;
-  --header-ink: #243b30;
+  --header-chrome: var(--color-chrome);
+  --header-green: var(--color-primary);
+  --header-ink: var(--color-text);
   --header-nav-default: rgb(45 118 85 / 7%);
   --header-nav-hover: rgb(45 118 85 / 12%);
   --header-nav-active: rgb(45 118 85 / 18%);
