@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { Transaction } from '../../data';
 
 @Component({
@@ -9,6 +9,8 @@ import { Transaction } from '../../data';
 })
 export class TransactionsPage {
   public transactions = input.required<Transaction[]>();
+
+  public onAddTransaction = output();
 
   protected formatDate(date: Date) {
     return date.toLocaleDateString('en-GB', {

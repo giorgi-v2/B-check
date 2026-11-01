@@ -11,7 +11,13 @@
       <app-my-cards-page [cards]="cards()"> </app-my-cards-page>
     }
     @case ('transactions') {
-      <app-transactions-page [transactions]="transactions()"></app-transactions-page>
+      <app-transactions-page
+        [transactions]="transactions()"
+        (onAddTransaction)="handleCurrentRouteChange('transaction-creation')"
+      ></app-transactions-page>
+    }
+    @case ('transaction-creation') {
+      <app-transaction-creation-page></app-transaction-creation-page>
     }
   }
 </main>

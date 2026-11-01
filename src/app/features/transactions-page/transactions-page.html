@@ -5,7 +5,9 @@
     <h1 class="transactions-page-title">Transactions</h1>
     <p class="transactions-page-description">Every payment. Every transfer. All in one place.</p>
   </div>
-  <button class="transactions-add" type="button">Add transaction</button>
+  <button class="transactions-add" type="button" (click)="onAddTransaction.emit()">
+    Add transaction
+  </button>
 </header>
 
 <section class="transactions-panel" aria-labelledby="transactions-table-title">

@@ -1,0 +1,141 @@
+<form class="transaction-form" aria-labelledby="transaction-form-title">
+  <header class="transaction-form-header">
+    <span class="transaction-form-icon" aria-hidden="true">
+      <i class="fa-solid fa-arrow-right-arrow-left"></i>
+    </span>
+    <div>
+      <h1 id="transaction-form-title">Add transaction</h1>
+      <p>Keep your payments and transfers in one place.</p>
+    </div>
+  </header>
+
+  <fieldset class="transaction-form-fields">
+    <legend>Transaction details</legend>
+
+    <div class="form-field">
+      <label for="type">Transaction type</label>
+      <div class="form-select">
+        <select name="type" id="type" [(ngModel)]="transaction().type" required>
+          <option [ngValue]="undefined" disabled>Select type</option>
+          <option value="income">Income</option>
+          <option value="outcome">Outcome</option>
+        </select>
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="date">Date and time</label>
+      <input type="datetime-local" name="date" id="date" ngModel required />
+    </div>
+
+    <div class="form-field">
+      <label for="amount">Amount</label>
+      <input
+        type="number"
+        name="amount"
+        id="amount"
+        [(ngModel)]="transaction().amount"
+        min="0.01"
+        step="0.01"
+        inputmode="decimal"
+        placeholder="0.00"
+        required
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="currency">Currency</label>
+      <div class="form-select">
+        <select name="currency" id="currency" [(ngModel)]="transaction().currency" required>
+          <option [ngValue]="undefined" disabled>Select currency</option>
+          <option value="GEL">GEL · Georgian lari</option>
+          <option value="USD">USD · US dollar</option>
+          <option value="EUR">EUR · Euro</option>
+        </select>
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="form-field form-field-wide">
+      <label for="place">Place <span class="form-optional">(optional)</span></label>
+      <input
+        type="text"
+        name="place"
+        id="place"
+        [(ngModel)]="transaction().place"
+        placeholder="e.g. Spar or Bolt"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="category">Category <span class="form-optional">(optional)</span></label>
+      <div class="form-select">
+        <select name="category" id="category" [(ngModel)]="transaction().category">
+          <option [ngValue]="undefined">Select category</option>
+          <option value="products">Products</option>
+          <option value="health">Health</option>
+          <option value="transport">Transport</option>
+          <option value="salary">Salary</option>
+          <option value="transfer">Transfer</option>
+        </select>
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="status">Status</label>
+      <div class="form-select">
+        <select name="status" id="status" [(ngModel)]="transaction().status" required>
+          <option [ngValue]="undefined" disabled>Select status</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+          <option value="failed">Failed</option>
+        </select>
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="transaction-form-fields transaction-form-card">
+    <legend>Card details</legend>
+
+    <div class="form-field">
+      <label for="card-name">Card name</label>
+      <input
+        type="text"
+        name="cardName"
+        id="card-name"
+        [(ngModel)]="transaction().cardName"
+        placeholder="e.g. Everyday debit"
+        required
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="card-number">Last 4 digits</label>
+      <input
+        type="text"
+        name="cardNumberLast4Digets"
+        id="card-number"
+        [(ngModel)]="transaction().cardNumberLast4Digets"
+        inputmode="numeric"
+        pattern="[0-9]{4}"
+        minlength="4"
+        maxlength="4"
+        placeholder="e.g. 0090"
+        aria-describedby="card-number-hint"
+        required
+      />
+      <p class="form-hint" id="card-number-hint">Only the last four digits of your card.</p>
+    </div>
+  </fieldset>
+
+  <footer class="transaction-form-actions">
+    <button class="form-button form-button-secondary" type="reset">Clear form</button>
+    <button class="form-button form-button-primary" type="submit">
+      <i class="fa-solid fa-plus" aria-hidden="true"></i>
+      Add transaction
+    </button>
+  </footer>
+</form>

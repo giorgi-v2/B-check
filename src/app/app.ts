@@ -6,14 +6,16 @@ import { MyCardsPage } from './features/my-cards-page/my-cards-page';
 import { TransactionsPage } from './features/transactions-page/transactions-page';
 import { RouteCode } from './route';
 import { Card, Transaction } from './data';
+import { TransactionCreationPage } from './features/transaction-creation-page/transaction-creation-page';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Footer, DashboardPage, MyCardsPage, TransactionsPage],
+  imports: [Header, Footer, DashboardPage, MyCardsPage, TransactionsPage, TransactionCreationPage],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
+  [x: string]: any;
   protected readonly title = signal('b-check-project');
 
   protected currentRoute: WritableSignal<RouteCode> = signal('dashboard');
