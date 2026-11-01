@@ -1,26 +1,51 @@
-<section class="content">
+<section class="content" aria-labelledby="dashboard-title">
   <div class="content_container">
     <div class="content_container_header">
-      <h1 class="content_container_title">Your money at a glance!</h1>
-      <p>A little clarity for every financial decision.</p>
+      <h1 id="dashboard-title" class="content_container_title">Your money, at a glance.</h1>
+      <p class="content_container_description">A little clarity for every financial decision.</p>
     </div>
-    <!-- here should be another container which will contain calendar -->
+    <div class="content_period" aria-label="Reporting period">
+      <svg class="content_icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="5" width="18" height="16" rx="3" />
+        <path d="M7 3v4m10-4v4M3 10h18" />
+      </svg>
+      <span>October 2026</span>
+      <svg class="content_period_chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </div>
   </div>
   <div class="content_cards">
     <div class="content_card content_card_total">
-      <p>total balance</p>
-      <!-- place for balance -->
-      <p>currency:GEL</p>
+      <div class="content_card_header">
+        <h2 class="content_card_title">Total balance</h2>
+        <svg class="content_icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <rect x="2.5" y="5" width="19" height="14" rx="3" />
+          <path d="M3 10h18M6 15h4" />
+        </svg>
+      </div>
+      <p class="content_card_amount">₾ 18,450.00</p>
+      <p class="content_card_description">GEL account · Other currencies in My cards</p>
     </div>
     <div class="content_card content_card_income">
-      <p>income this month</p>
-      <!-- place for balance -->
-      <p>01.10.2026-till now</p>
+      <div class="content_card_header">
+        <h2 class="content_card_title">Income this month</h2>
+        <svg class="content_icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6 6 18M6 6v12h12" />
+        </svg>
+      </div>
+      <p class="content_card_amount">₾ 8,250.00</p>
+      <p class="content_card_description">01 – 21 October 2026</p>
     </div>
     <div class="content_card content_card_spent">
-      <p>spent this month</p>
-      <!-- place for balance -->
-      <p>01.10.2026-till now</p>
+      <div class="content_card_header">
+        <h2 class="content_card_title">Spent this month</h2>
+        <svg class="content_icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M6 18 18 6M6 6h12v12" />
+        </svg>
+      </div>
+      <p class="content_card_amount">₾ 3,640.00</p>
+      <p class="content_card_description">01 – 21 October 2026</p>
     </div>
   </div>
 </section>
