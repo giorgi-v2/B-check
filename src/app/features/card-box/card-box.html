@@ -1,10 +1,26 @@
 @let _card = card();
-<div>
-  <div>
+<div class="card-box">
+  <div class="card-box-icon" aria-hidden="true">
     <i [class]="cardIcon()"></i>
   </div>
-  <div>
-    <span>{{ _card.name }}</span>
-    <p>{{ cardType() }}{{ _card.cardNumber }}</p>
+  <div class="card-box-body">
+    <span class="card-box-name">{{ _card.name }}</span>
+    <p class="card-box-number">{{ cardType() }} {{ _card.cardNumber }}</p>
   </div>
+  <svg
+    class="card-box-check"
+    aria-hidden="true"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      d="m4 12 5 5L20 6"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
 </div>

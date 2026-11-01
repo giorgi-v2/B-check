@@ -79,6 +79,50 @@ export class App {
         },
       ],
     },
+    {
+      name: 'Travel card',
+      id: 2,
+      provider: 'TBC',
+      type: 'mastercard',
+      cardNumber: '**** **** **** 4765',
+      cardHolder: 'Alex Dune',
+      expirationDate: new Date(2039, 7),
+      cvv: '***',
+      accounts: [
+        {
+          id: 1,
+          amount: 201,
+          currency: 'GEL',
+        },
+        {
+          id: 1,
+          amount: 98,
+          currency: 'USD',
+        },
+      ],
+    },
+    {
+      name: 'Savings card',
+      id: 3,
+      provider: 'Credo',
+      type: 'visa',
+      cardNumber: '**** **** **** 0342',
+      cardHolder: 'Alex Dune',
+      expirationDate: new Date(2039, 7),
+      cvv: '***',
+      accounts: [
+        {
+          id: 1,
+          amount: 201,
+          currency: 'GEL',
+        },
+        {
+          id: 1,
+          amount: 98,
+          currency: 'USD',
+        },
+      ],
+    },
   ]);
 
   protected handleCurrentRouteChange(route: RouteCode) {
