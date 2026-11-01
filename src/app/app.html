@@ -1,9 +1,9 @@
 <app-header
-  [currentRoute]="currentRoute"
+  [currentRoute]="currentRoute()"
   (onCurrentRouteChange)="handleCurrentRouteChange($event)"
 ></app-header>
 <main class="app-main">
-  @switch (currentRoute) {
+  @switch (currentRoute()) {
     @case ('dashboard') {
       <app-dashboard-page></app-dashboard-page>
     }

@@ -1,10 +1,11 @@
 <nav class="header_navigation_options" aria-label="Main navigation">
   <div class="header_navigation_links">
+    @let _currentRoute = currentRoute();
     <a
       href="#"
       (click)="onCurrentRouteChange.emit('dashboard')"
-      [class.header_navigation_option--active]="currentRoute === 'dashboard'"
-      [attr.aria-disabled]="currentRoute === 'dashboard'"
+      [class.header_navigation_option--active]="_currentRoute === 'dashboard'"
+      [attr.aria-disabled]="_currentRoute === 'dashboard'"
       class="header_navigation_option header_navigation_option_dashboard"
       aria-current="page"
       ><img src="icons/dashboard.svg" alt="" />Dashboard</a
@@ -12,16 +13,16 @@
     <a
       href="#"
       (click)="onCurrentRouteChange.emit('my-cards')"
-      [class.header_navigation_option--active]="currentRoute === 'my-cards'"
-      [attr.aria-disabled]="currentRoute === 'my-cards'"
+      [class.header_navigation_option--active]="_currentRoute === 'my-cards'"
+      [attr.aria-disabled]="_currentRoute === 'my-cards'"
       class="header_navigation_option header_navigation_option_mycards"
       ><img src="icons/card.svg" alt="" />My Cards</a
     >
     <a
       href="#"
       (click)="onCurrentRouteChange.emit('transactions')"
-      [class.header_navigation_option--active]="currentRoute === 'transactions'"
-      [attr.aria-disabled]="currentRoute === 'transactions'"
+      [class.header_navigation_option--active]="_currentRoute === 'transactions'"
+      [attr.aria-disabled]="_currentRoute === 'transactions'"
       class="header_navigation_option header_navigation_option_transactions"
       ><img src="icons/transactions.svg" alt="" />Transactions</a
     >

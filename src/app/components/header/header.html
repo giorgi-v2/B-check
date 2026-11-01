@@ -5,7 +5,7 @@
       <span class="header_title">B-Check</span>
     </div>
     <app-navigation
-      [currentRoute]="currentRoute"
+      [currentRoute]="currentRoute()"
       (onCurrentRouteChange)="onCurrentRouteChange.emit($event)"
     ></app-navigation>
   </div>

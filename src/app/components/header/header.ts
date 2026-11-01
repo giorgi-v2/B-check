@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, InputSignal, output, Output } from '@angular/core';
 import { Navigation } from '../navigation/navigation';
+import { RouteCode } from '../../route';
 
 @Component({
   imports: [Navigation],
@@ -8,8 +9,6 @@ import { Navigation } from '../navigation/navigation';
   templateUrl: './header.html',
 })
 export class Header {
-  @Input()
-  public currentRoute: 'dashboard' | 'my-cards' | 'transactions' = 'dashboard';
-  @Output()
-  public onCurrentRouteChange = new EventEmitter<'dashboard' | 'my-cards' | 'transactions'>();
+  public currentRoute: InputSignal<RouteCode> = input<RouteCode>('dashboard');
+  public onCurrentRouteChange = output<RouteCode>();
 }
