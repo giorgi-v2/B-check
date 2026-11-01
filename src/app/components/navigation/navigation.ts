@@ -8,6 +8,6 @@ import { RouteCode } from '../../route';
   templateUrl: './navigation.html',
 })
 export class Navigation {
-  public currentRoute: InputSignal<RouteCode> = input<RouteCode>('dashboard');
+  public currentRoute = input<RouteCode>('dashboard');
   public onCurrentRouteChange = output<RouteCode>();
 }

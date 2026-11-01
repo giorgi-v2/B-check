@@ -1,4 +1,4 @@
-@let transactionsCount = transactions.length;
+@let transactionsCount = transactions().length;
 
 <header class="transactions-header">
   <h1>All transactions</h1>
@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (transaction of transactions; track transaction.id) {
+    @for (transaction of transactions(); track transaction.id) {
       <tr>
         <td>
           <div class="transaction-cell">

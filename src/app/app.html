@@ -11,7 +11,7 @@
       <app-my-cards-page></app-my-cards-page>
     }
     @case ('transactions') {
-      <app-transactions-page></app-transactions-page>
+      <app-transactions-page [transactions]="transactions()"></app-transactions-page>
     }
   }
 </main>
