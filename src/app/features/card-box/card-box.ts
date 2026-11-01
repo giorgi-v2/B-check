@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Card } from '../../data';
 
 @Component({
@@ -10,6 +10,7 @@ import { Card } from '../../data';
 export class CardBox {
   public card = input.required<Card>();
   public selected = input<boolean>(false);
+  public onClick = output();
 
   protected cardType = computed(() => {
     switch (this.card().type) {

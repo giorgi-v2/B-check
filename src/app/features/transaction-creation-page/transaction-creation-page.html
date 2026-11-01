@@ -173,7 +173,12 @@
     <legend>Cards</legend>
     <div class="form-card-previews form-field-wide" role="list" aria-label="Available cards">
       @for (card of cards(); track card.id) {
-        <app-card-box [card]="card" role="listitem"></app-card-box>
+        <app-card-box
+          [card]="card"
+          role="listitem"
+          [selected]="card.id === transaction().cardId"
+          (onClick)="transaction.update((transaction) => ({ ...transaction, cardId: card.id }))"
+        ></app-card-box>
       } @empty {
         <p class="form-hint">No cards available.</p>
       }

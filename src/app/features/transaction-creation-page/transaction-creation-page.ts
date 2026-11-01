@@ -24,5 +24,6 @@ export class TransactionCreationPage {
     status: undefined,
     cardName: '',
     cardNumberLast4Digets: '',
+    cardId: undefined,
   });
 }

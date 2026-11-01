@@ -12,6 +12,7 @@ export interface Transaction {
   status: 'completed' | 'pending' | 'failed';
   cardName: string;
   cardNumberLast4Digets: string;
+  cardId: number;
 }
 
 export interface Card {
