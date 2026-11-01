@@ -1,9 +1,10 @@
 import { Component, input, output, signal } from '@angular/core';
 import { Card, Transaction } from '../../data';
 import { FormsModule } from '@angular/forms';
+import { CardBox } from '../card-box/card-box';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, CardBox],
   selector: 'app-transaction-creation-page',
   styleUrl: './transaction-creation-page.scss',
   templateUrl: './transaction-creation-page.html',

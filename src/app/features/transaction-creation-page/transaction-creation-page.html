@@ -9,18 +9,85 @@
     </div>
   </header>
 
-  <fieldset class="transaction-form-fields">
-    <legend>Transaction details</legend>
+  <fieldset class="transaction-form-fields" aria-label="Transaction details">
+    <fieldset class="form-choice-group form-field-wide" aria-label="Transaction type">
+      <div class="type-options">
+        <label class="choice-tile type-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="type"
+            value="income"
+            [(ngModel)]="transaction().type"
+            required
+          />
+          <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          <span>Income</span>
+        </label>
+        <label class="choice-tile type-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="type"
+            value="outcome"
+            [(ngModel)]="transaction().type"
+            required
+          />
+          <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+          <span>Outcome</span>
+        </label>
+      </div>
+    </fieldset>
 
-    <div class="form-field">
-      <label for="type">Transaction type</label>
-      <div class="form-select">
-        <select name="type" id="type" [(ngModel)]="transaction().type" required>
-          <option [ngValue]="undefined" disabled>Select type</option>
-          <option value="income">Income</option>
-          <option value="outcome">Outcome</option>
-        </select>
-        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+    <div class="form-field form-field-wide">
+      <label for="amount">Amount</label>
+      <div class="amount-group">
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          [(ngModel)]="transaction().amount"
+          min="0.01"
+          step="0.01"
+          inputmode="decimal"
+          placeholder="0.00"
+          required
+        />
+        <div class="amount-currency" role="radiogroup" aria-label="Currency">
+          <label class="choice-tile currency-tile">
+            <input
+              class="choice-input"
+              type="radio"
+              name="currency"
+              value="GEL"
+              [(ngModel)]="transaction().currency"
+              required
+            />
+            <span>GEL</span>
+          </label>
+          <label class="choice-tile currency-tile">
+            <input
+              class="choice-input"
+              type="radio"
+              name="currency"
+              value="USD"
+              [(ngModel)]="transaction().currency"
+              required
+            />
+            <span>USD</span>
+          </label>
+          <label class="choice-tile currency-tile">
+            <input
+              class="choice-input"
+              type="radio"
+              name="currency"
+              value="EUR"
+              [(ngModel)]="transaction().currency"
+              required
+            />
+            <span>EUR</span>
+          </label>
+        </div>
       </div>
     </div>
 
@@ -30,34 +97,6 @@
     </div>
 
     <div class="form-field">
-      <label for="amount">Amount</label>
-      <input
-        type="number"
-        name="amount"
-        id="amount"
-        [(ngModel)]="transaction().amount"
-        min="0.01"
-        step="0.01"
-        inputmode="decimal"
-        placeholder="0.00"
-        required
-      />
-    </div>
-
-    <div class="form-field">
-      <label for="currency">Currency</label>
-      <div class="form-select">
-        <select name="currency" id="currency" [(ngModel)]="transaction().currency" required>
-          <option [ngValue]="undefined" disabled>Select currency</option>
-          <option value="GEL">GEL · Georgian lari</option>
-          <option value="USD">USD · US dollar</option>
-          <option value="EUR">EUR · Euro</option>
-        </select>
-        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-      </div>
-    </div>
-
-    <div class="form-field form-field-wide">
       <label for="place">Place <span class="form-optional">(optional)</span></label>
       <input
         type="text"
@@ -68,66 +107,76 @@
       />
     </div>
 
-    <div class="form-field">
-      <label for="category">Category <span class="form-optional">(optional)</span></label>
-      <div class="form-select">
-        <select name="category" id="category" [(ngModel)]="transaction().category">
-          <option [ngValue]="undefined">Select category</option>
-          <option value="products">Products</option>
-          <option value="health">Health</option>
-          <option value="transport">Transport</option>
-          <option value="salary">Salary</option>
-          <option value="transfer">Transfer</option>
-        </select>
-        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+    <fieldset class="form-choice-group form-field-wide">
+      <legend>Category <span class="form-optional">(optional)</span></legend>
+      <div class="category-options">
+        <label class="choice-tile category-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="category"
+            value="products"
+            [(ngModel)]="transaction().category"
+          />
+          <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
+          <span>Products</span>
+        </label>
+        <label class="choice-tile category-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="category"
+            value="health"
+            [(ngModel)]="transaction().category"
+          />
+          <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+          <span>Health</span>
+        </label>
+        <label class="choice-tile category-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="category"
+            value="transport"
+            [(ngModel)]="transaction().category"
+          />
+          <i class="fa-solid fa-car" aria-hidden="true"></i>
+          <span>Transport</span>
+        </label>
+        <label class="choice-tile category-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="category"
+            value="salary"
+            [(ngModel)]="transaction().category"
+          />
+          <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+          <span>Salary</span>
+        </label>
+        <label class="choice-tile category-tile">
+          <input
+            class="choice-input"
+            type="radio"
+            name="category"
+            value="transfer"
+            [(ngModel)]="transaction().category"
+          />
+          <i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i>
+          <span>Transfer</span>
+        </label>
       </div>
-    </div>
-
-    <div class="form-field">
-      <label for="status">Status</label>
-      <div class="form-select">
-        <select name="status" id="status" [(ngModel)]="transaction().status" required>
-          <option [ngValue]="undefined" disabled>Select status</option>
-          <option value="completed">Completed</option>
-          <option value="pending">Pending</option>
-          <option value="failed">Failed</option>
-        </select>
-        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-      </div>
-    </div>
+    </fieldset>
   </fieldset>
 
   <fieldset class="transaction-form-fields transaction-form-card">
-    <legend>Card details</legend>
-
-    <div class="form-field">
-      <label for="card-name">Card name</label>
-      <input
-        type="text"
-        name="cardName"
-        id="card-name"
-        [(ngModel)]="transaction().cardName"
-        placeholder="e.g. Everyday debit"
-        required
-      />
-    </div>
-
-    <div class="form-field">
-      <label for="card-number">Last 4 digits</label>
-      <input
-        type="text"
-        name="cardNumberLast4Digets"
-        id="card-number"
-        [(ngModel)]="transaction().cardNumberLast4Digets"
-        inputmode="numeric"
-        pattern="[0-9]{4}"
-        minlength="4"
-        maxlength="4"
-        placeholder="e.g. 0090"
-        aria-describedby="card-number-hint"
-        required
-      />
-      <p class="form-hint" id="card-number-hint">Only the last four digits of your card.</p>
+    <legend>Cards</legend>
+    <div class="form-card-previews form-field-wide" role="list" aria-label="Available cards">
+      @for (card of cards(); track card.id) {
+        <app-card-box [card]="card" role="listitem"></app-card-box>
+      } @empty {
+        <p class="form-hint">No cards available.</p>
+      }
     </div>
   </fieldset>
 

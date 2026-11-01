@@ -9,6 +9,7 @@ import { Card } from '../../data';
 })
 export class CardBox {
   public card = input.required<Card>();
+  public selected = input<boolean>(false);
 
   protected cardType = computed(() => {
     switch (this.card().type) {
