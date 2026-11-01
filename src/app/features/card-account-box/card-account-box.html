@@ -1,0 +1,12 @@
+@let _account = account();
+@let _currency = currencies[_account.currency];
+
+<div class="card-account-box">
+  <span class="card-account-icon" aria-hidden="true">
+    <i [class]="'fa-solid ' + _currency.icon"></i>
+  </span>
+  <div class="card-account-body">
+    <p class="card-account-name">{{ _account.currency }} account</p>
+    <p class="card-account-amount">{{ _currency.symbol }} {{ _account.amount }}</p>
+  </div>
+</div>

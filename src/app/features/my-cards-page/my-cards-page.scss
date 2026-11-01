@@ -53,20 +53,28 @@
   }
 }
 
-.my-cards-list {
+.my-cards-list,
+.my-cards-accounts {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+}
 
-  app-card-box:first-child {
-    --card-box-background: var(--color-positive-subtle);
-    --card-box-check-display: block;
-  }
+.my-cards-accounts {
+  gap: 28px;
+}
+
+.my-cards-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
 }
 
 @media (max-width: 960px) {
-  .my-cards-list {
+  .my-cards-list,
+  .my-cards-accounts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -90,7 +98,8 @@
     justify-self: start;
   }
 
-  .my-cards-list {
+  .my-cards-list,
+  .my-cards-accounts {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }

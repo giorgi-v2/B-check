@@ -5,9 +5,24 @@
   </div>
   <button class="my-cards-add" type="button">+ Add a card</button>
 
+  @let _card = selectedCard();
+
   <div class="my-cards-list">
     @for (card of cards(); track card.id) {
-      <app-card-box [card]="card"></app-card-box>
+      <app-card-box
+        [card]="card"
+        [selected]="card.id === _card?.id"
+        (onClick)="selectedCardId.set(card.id)"
+      ></app-card-box>
     }
   </div>
+  @if (_card) {
+    <div class="my-cards-accounts" role="list" [attr.aria-label]="_card.name + ' accounts'">
+      @for (account of _card.accounts; track $index) {
+        <app-card-account-box [account]="account" role="listitem"></app-card-account-box>
+      } @empty {
+        <p class="my-cards-empty">No accounts available for this card.</p>
+      }
+    </div>
+  }
 </section>

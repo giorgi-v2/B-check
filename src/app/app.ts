@@ -1,4 +1,4 @@
-import { Component, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, effect, Signal, signal, WritableSignal } from '@angular/core';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { DashboardPage } from './features/dashboard-page/dashboard-page';
@@ -7,6 +7,8 @@ import { TransactionsPage } from './features/transactions-page/transactions-page
 import { RouteCode } from './route';
 import { Card, Transaction } from './data';
 import { TransactionCreationPage } from './features/transaction-creation-page/transaction-creation-page';
+
+const localStorageKey = 'data';
 
 @Component({
   selector: 'app-root',
@@ -20,46 +22,7 @@ export class App {
 
   protected currentRoute: WritableSignal<RouteCode> = signal('dashboard');
 
-  protected transactions = signal<Transaction[]>([
-    {
-      id: 1,
-      type: 'income',
-      category: 'transfer',
-      amount: 200,
-      currency: 'USD',
-      date: new Date(2026, 9, 12, 8, 45, 20),
-      status: 'completed',
-      cardName: 'Alex',
-      cardNumberLast4Digets: '0090',
-      cardId: 1,
-    },
-    {
-      id: 22,
-      place: 'Spar',
-      type: 'outcome',
-      category: 'products',
-      amount: 41.87,
-      currency: 'GEL',
-      date: new Date(2026, 10, 5, 17, 34, 2),
-      status: 'completed',
-      cardName: 'Alex',
-      cardNumberLast4Digets: '0090',
-      cardId: 2,
-    },
-    {
-      id: 15,
-      place: 'Bolt',
-      type: 'outcome',
-      category: 'transport',
-      amount: 30,
-      currency: 'EUR',
-      date: new Date(2026, 10, 20, 5, 23, 9),
-      status: 'completed',
-      cardName: 'Alex',
-      cardNumberLast4Digets: '0090',
-      cardId: 3,
-    },
-  ]);
+  protected transactions = signal<Transaction[]>([]);
 
   protected cards = signal<Card[]>([
     {
@@ -129,6 +92,67 @@ export class App {
       ],
     },
   ]);
+
+  protected dataSaverEffect = effect(() => {
+    const transactions = this.transactions();
+    const cards = this.cards();
+    const data = {
+      transactions,
+      cards,
+    };
+    localStorage.setItem(localStorageKey, JSON.stringify(data));
+  });
+
+  public constructor() {
+    const data = localStorage.getItem(localStorageKey);
+    if (!data) {
+      return;
+    }
+    const parseToData = JSON.parse(data) as { transactions: Transaction[]; cards: Card[] };
+    if (parseToData.transactions) {
+      parseToData.transactions.forEach((element) => {
+        element.date = new Date(element.date);
+      });
+      this.transactions.set(parseToData.transactions);
+    }
+    if (parseToData.cards) {
+      this.cards.set(parseToData.cards);
+    }
+  }
+
+  protected createTransaction(transaction: Transaction) {
+    if (this.transactions().length > 0) {
+      const newId = Math.max(...this.transactions().map((x) => x.id)) + 1;
+      transaction.id = newId;
+    } else {
+      transaction.id = 1;
+    }
+    const card = this.cards().find((x) => x.id === transaction.cardId);
+    if (!card) {
+      alert('we cant create a transaction');
+      return;
+    }
+    const cardAccount = card.accounts.find((x) => x.currency === transaction.currency);
+    if (!cardAccount) {
+      alert('your card does not support this currency');
+      return;
+    }
+    if (transaction.type === 'outcome' && transaction.amount > cardAccount.amount) {
+      alert('There is not enough balance on account');
+      return;
+    }
+    this.transactions.update((transactions) => [...transactions, transaction]);
+    switch (transaction.type) {
+      case 'income':
+        cardAccount.amount += transaction.amount;
+        break;
+      case 'outcome':
+        cardAccount.amount -= transaction.amount;
+        break;
+    }
+    this.cards.update((cards) => [...cards.filter((x) => x.id !== transaction.cardId), card]);
+    this.handleCurrentRouteChange('transactions');
+  }
 
   protected handleCurrentRouteChange(route: RouteCode) {
     this.currentRoute.set(route);

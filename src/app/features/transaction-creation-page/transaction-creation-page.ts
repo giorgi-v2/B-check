@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { Card, Transaction } from '../../data';
 import { FormsModule } from '@angular/forms';
 import { CardBox } from '../card-box/card-box';
@@ -13,17 +13,33 @@ export class TransactionCreationPage {
   public cards = input.required<Card[]>();
 
   public onTransactionCreate = output<Transaction>();
-  protected transaction = signal<Partial<Transaction>>({
-    id: 0,
-    place: '',
-    type: undefined,
-    category: undefined,
-    amount: 0,
-    currency: undefined,
-    date: undefined,
-    status: undefined,
-    cardName: '',
-    cardNumberLast4Digets: '',
-    cardId: undefined,
-  });
+
+  protected place = signal<Transaction['place']>(undefined);
+  protected type = signal<Transaction['type']>('outcome');
+  protected category = signal<Transaction['category']>(undefined);
+  protected amount = signal<Transaction['amount']>(0);
+  protected currency = signal<Transaction['currency']>('GEL');
+  protected date = signal<Transaction['date']>(new Date());
+  protected cardId = signal<Transaction['cardId'] | undefined>(undefined);
+
+  protected createTransaction() {
+    const selectedCard = this.cards().find((x) => x.id === this.cardId());
+    if (!selectedCard) {
+      alert('please choose a card');
+      return;
+    }
+    this.onTransactionCreate.emit({
+      id: 0,
+      type: this.type(),
+      place: this.place(),
+      category: this.category(),
+      amount: this.amount(),
+      currency: this.currency(),
+      date: this.date(),
+      cardId: this.cardId() ?? 0,
+      cardName: selectedCard.name,
+      cardNumberLast4Digets: selectedCard?.cardNumber,
+      status: 'completed',
+    });
+  }
 }

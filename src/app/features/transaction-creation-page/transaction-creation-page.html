@@ -18,7 +18,7 @@
             type="radio"
             name="type"
             value="income"
-            [(ngModel)]="transaction().type"
+            [(ngModel)]="type"
             required
           />
           <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
@@ -30,7 +30,7 @@
             type="radio"
             name="type"
             value="outcome"
-            [(ngModel)]="transaction().type"
+            [(ngModel)]="type"
             required
           />
           <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
@@ -46,7 +46,7 @@
           type="number"
           name="amount"
           id="amount"
-          [(ngModel)]="transaction().amount"
+          [(ngModel)]="amount"
           min="0.01"
           step="0.01"
           inputmode="decimal"
@@ -60,7 +60,7 @@
               type="radio"
               name="currency"
               value="GEL"
-              [(ngModel)]="transaction().currency"
+              [(ngModel)]="currency"
               required
             />
             <span>GEL</span>
@@ -71,7 +71,7 @@
               type="radio"
               name="currency"
               value="USD"
-              [(ngModel)]="transaction().currency"
+              [(ngModel)]="currency"
               required
             />
             <span>USD</span>
@@ -82,7 +82,7 @@
               type="radio"
               name="currency"
               value="EUR"
-              [(ngModel)]="transaction().currency"
+              [(ngModel)]="currency"
               required
             />
             <span>EUR</span>
@@ -102,7 +102,7 @@
         type="text"
         name="place"
         id="place"
-        [(ngModel)]="transaction().place"
+        [(ngModel)]="place"
         placeholder="e.g. Spar or Bolt"
       />
     </div>
@@ -116,7 +116,7 @@
             type="radio"
             name="category"
             value="products"
-            [(ngModel)]="transaction().category"
+            [(ngModel)]="category"
           />
           <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
           <span>Products</span>
@@ -127,7 +127,7 @@
             type="radio"
             name="category"
             value="health"
-            [(ngModel)]="transaction().category"
+            [(ngModel)]="category"
           />
           <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
           <span>Health</span>
@@ -138,7 +138,7 @@
             type="radio"
             name="category"
             value="transport"
-            [(ngModel)]="transaction().category"
+            [(ngModel)]="category"
           />
           <i class="fa-solid fa-car" aria-hidden="true"></i>
           <span>Transport</span>
@@ -149,7 +149,7 @@
             type="radio"
             name="category"
             value="salary"
-            [(ngModel)]="transaction().category"
+            [(ngModel)]="category"
           />
           <i class="fa-solid fa-wallet" aria-hidden="true"></i>
           <span>Salary</span>
@@ -160,7 +160,7 @@
             type="radio"
             name="category"
             value="transfer"
-            [(ngModel)]="transaction().category"
+            [(ngModel)]="category"
           />
           <i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i>
           <span>Transfer</span>
@@ -176,8 +176,8 @@
         <app-card-box
           [card]="card"
           role="listitem"
-          [selected]="card.id === transaction().cardId"
-          (onClick)="transaction.update((transaction) => ({ ...transaction, cardId: card.id }))"
+          [selected]="card.id === cardId()"
+          (onClick)="cardId.set(card.id)"
         ></app-card-box>
       } @empty {
         <p class="form-hint">No cards available.</p>
@@ -187,7 +187,7 @@
 
   <footer class="transaction-form-actions">
     <button class="form-button form-button-secondary" type="reset">Clear form</button>
-    <button class="form-button form-button-primary" type="submit">
+    <button class="form-button form-button-primary" type="submit" (click)="createTransaction()">
       <i class="fa-solid fa-plus" aria-hidden="true"></i>
       Add transaction
     </button>
