@@ -8,7 +8,7 @@
       <app-dashboard-page></app-dashboard-page>
     }
     @case ('my-cards') {
-      <app-my-cards-page></app-my-cards-page>
+      <app-my-cards-page [cards]="cards()"> </app-my-cards-page>
     }
     @case ('transactions') {
       <app-transactions-page [transactions]="transactions()"></app-transactions-page>

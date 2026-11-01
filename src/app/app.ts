@@ -5,7 +5,7 @@ import { DashboardPage } from './features/dashboard-page/dashboard-page';
 import { MyCardsPage } from './features/my-cards-page/my-cards-page';
 import { TransactionsPage } from './features/transactions-page/transactions-page';
 import { RouteCode } from './route';
-import { Transaction } from './data';
+import { Card, Transaction } from './data';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +17,6 @@ export class App {
   protected readonly title = signal('b-check-project');
 
   protected currentRoute: WritableSignal<RouteCode> = signal('dashboard');
-
-  protected handleCurrentRouteChange(route: RouteCode) {
-    this.currentRoute.set(route);
-  }
 
   protected transactions = signal<Transaction[]>([
     {
@@ -59,4 +55,33 @@ export class App {
       cardNumberLast4Digets: '0090',
     },
   ]);
+
+  protected cards = signal<Card[]>([
+    {
+      name: 'everyday debit',
+      id: 1,
+      provider: 'BOG',
+      type: 'mastercard',
+      cardNumber: '**** **** **** 0102',
+      cardHolder: 'Alex Dune',
+      expirationDate: new Date(2039, 7),
+      cvv: '***',
+      accounts: [
+        {
+          id: 1,
+          amount: 201,
+          currency: 'GEL',
+        },
+        {
+          id: 1,
+          amount: 98,
+          currency: 'USD',
+        },
+      ],
+    },
+  ]);
+
+  protected handleCurrentRouteChange(route: RouteCode) {
+    this.currentRoute.set(route);
+  }
 }
