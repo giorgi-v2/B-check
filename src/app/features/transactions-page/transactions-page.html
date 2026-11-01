@@ -1,90 +1,102 @@
 @let transactionsCount = transactions().length;
 
-<header class="transactions-header">
-  <h1>All transactions</h1>
-  <span class="transactions-count">{{ transactionsCount }} results</span>
+<header class="transactions-page-header">
+  <div class="transactions-page-heading">
+    <h1 class="transactions-page-title">Transactions</h1>
+    <p class="transactions-page-description">Every payment. Every transfer. All in one place.</p>
+  </div>
+  <button class="transactions-add" type="button">Add transaction</button>
 </header>
 
-<table>
-  <thead>
-    <tr>
-      <th>Transaction</th>
-      <th>Date</th>
-      <th>Card</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (transaction of transactions(); track transaction.id) {
-      <tr>
-        <td>
-          <div class="transaction-cell">
-            <div class="transaction-cell-icon">
-              @if (transaction.type === 'income') {
-                <svg class="transaction-icon-income" viewBox="0 0 24 24" aria-hidden="true">
-                  <use href="icons/transaction-income.svg#icon" />
-                </svg>
-              } @else if (transaction.type === 'outcome') {
-                <svg class="transaction-icon-outcome" viewBox="0 0 24 24" aria-hidden="true">
-                  <use href="icons/transaction-outcome.svg#icon" />
-                </svg>
-              } @else {
-                <img src="icons/transactions.svg" alt="" />
-              }
-            </div>
-            <div class="transaction-cell-body">
-              @if (transaction.type === 'outcome') {
-                <div class="transaction-cell-header">
-                  {{ transaction.place }}
-                </div>
-              }
-              <div class="transaction-cell-description">
-                <span>{{ transaction.category }} </span>
-                ·
-                <span>{{ transaction.status }}</span>
-              </div>
-            </div>
-          </div>
-        </td>
-        <td class="transaction-cell-date">
-          @let formatedDate = formatDate(transaction.date);
-          {{ formatedDate }}
-        </td>
-        <td class="transaction-cell-card">
-          {{ transaction.cardName }} · {{ transaction.cardNumberLast4Digets }}
-        </td>
-        <td
-          class="transaction-cell-amount"
-          [class.transaction-cell-amount-positive]="transaction.type === 'income'"
-          [class.transaction-cell-amount-negative]="transaction.type === 'outcome'"
-        >
-          @if (transaction.type === 'income') {
-            +
-          } @else if (transaction.type === 'outcome') {
-            -
-          }
-          {{ transaction.amount }}
-          @switch (transaction.currency) {
-            @case ('USD') {
-              $
-            }
-            @case ('EUR') {
-              €
-            }
-            @case ('GEL') {
-              ₾
-            }
-          }
-        </td>
-      </tr>
-    } @empty {
-      <tr>
-        <td class="transaction-cell-empty" colspan="4">No Transactions were found!</td>
-      </tr>
-    }
-  </tbody>
-</table>
+<section class="transactions-panel" aria-labelledby="transactions-table-title">
+  <header class="transactions-header">
+    <h2 id="transactions-table-title">All transactions</h2>
+    <span class="transactions-count">{{ transactionsCount }} results</span>
+  </header>
 
-<footer class="transactions-footer">
-  Showing {{ transactionsCount }} of {{ transactionsCount }} transactions
-</footer>
+  <div class="transactions-table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Transaction</th>
+          <th>Date</th>
+          <th>Card</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (transaction of transactions(); track transaction.id) {
+          <tr>
+            <td>
+              <div class="transaction-cell">
+                <div class="transaction-cell-icon">
+                  @if (transaction.type === 'income') {
+                    <svg class="transaction-icon-income" viewBox="0 0 24 24" aria-hidden="true">
+                      <use href="icons/transaction-income.svg#icon" />
+                    </svg>
+                  } @else if (transaction.type === 'outcome') {
+                    <svg class="transaction-icon-outcome" viewBox="0 0 24 24" aria-hidden="true">
+                      <use href="icons/transaction-outcome.svg#icon" />
+                    </svg>
+                  } @else {
+                    <img src="icons/transactions.svg" alt="" />
+                  }
+                </div>
+                <div class="transaction-cell-body">
+                  @if (transaction.type === 'outcome') {
+                    <div class="transaction-cell-header">
+                      {{ transaction.place }}
+                    </div>
+                  }
+                  <div class="transaction-cell-description">
+                    <span>{{ transaction.category }} </span>
+                    ·
+                    <span>{{ transaction.status }}</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="transaction-cell-date">
+              @let formatedDate = formatDate(transaction.date);
+              {{ formatedDate }}
+            </td>
+            <td class="transaction-cell-card">
+              {{ transaction.cardName }} · {{ transaction.cardNumberLast4Digets }}
+            </td>
+            <td
+              class="transaction-cell-amount"
+              [class.transaction-cell-amount-positive]="transaction.type === 'income'"
+              [class.transaction-cell-amount-negative]="transaction.type === 'outcome'"
+            >
+              @if (transaction.type === 'income') {
+                +
+              } @else if (transaction.type === 'outcome') {
+                -
+              }
+              {{ transaction.amount }}
+              @switch (transaction.currency) {
+                @case ('USD') {
+                  $
+                }
+                @case ('EUR') {
+                  €
+                }
+                @case ('GEL') {
+                  ₾
+                }
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td class="transaction-cell-empty" colspan="4">No Transactions were found!</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="transactions-footer">
+    Showing {{ transactionsCount }} of {{ transactionsCount }} transactions
+  </footer>
+</section>
