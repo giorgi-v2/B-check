@@ -1,5 +1,10 @@
 @let _card = card();
-
-<i class="fa-jelly fa-regular fa-credit-card"></i>
-<span>{{ _card.name }}</span>
-<p>{{ cardType() }}{{ _card.cardNumber }}</p>
+<div>
+  <div>
+    <i [class]="cardIcon()"></i>
+  </div>
+  <div>
+    <span>{{ _card.name }}</span>
+    <p>{{ cardType() }}{{ _card.cardNumber }}</p>
+  </div>
+</div>

@@ -61,7 +61,7 @@ export class App {
       name: 'everyday debit',
       id: 1,
       provider: 'BOG',
-      type: 'mastercard',
+      type: 'visa',
       cardNumber: '**** **** **** 0102',
       cardHolder: 'Alex Dune',
       expirationDate: new Date(2039, 7),

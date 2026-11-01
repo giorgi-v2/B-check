@@ -18,4 +18,12 @@ export class CardBox {
         return 'Mastercard';
     }
   });
+  protected cardIcon = computed(() => {
+    switch (this.card().type) {
+      case 'visa':
+        return 'fa-brands fa-cc-visa';
+      case 'mastercard':
+        return 'fa-brands fa-cc-mastercard';
+    }
+  });
 }

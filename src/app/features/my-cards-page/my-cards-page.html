@@ -6,13 +6,8 @@
   <button>+ Add a card</button>
 
   <div>
-    <div>
-      <i class="fa-jelly fa-regular fa-credit-card"></i>
-      <span>
-        @for (card of cards(); track card.id) {
-          <app-card-box [card]="card"></app-card-box>
-        }
-      </span>
-    </div>
+    @for (card of cards(); track card.id) {
+      <app-card-box [card]="card"></app-card-box>
+    }
   </div>
 </section>
