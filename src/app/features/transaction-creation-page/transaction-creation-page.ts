@@ -1,5 +1,5 @@
-import { Component, output, signal } from '@angular/core';
-import { Transaction } from '../../data';
+import { Component, input, output, signal } from '@angular/core';
+import { Card, Transaction } from '../../data';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './transaction-creation-page.html',
 })
 export class TransactionCreationPage {
+  public cards = input.required<Card[]>();
+
   public onTransactionCreate = output<Transaction>();
   protected transaction = signal<Partial<Transaction>>({
     id: 0,
