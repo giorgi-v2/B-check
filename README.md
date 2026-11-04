@@ -91,3 +91,13 @@ All displayed financial information is fictional demo data.
 - used `if` so it can choose icons or symbols what it has to add. used in _transactions-page_ component.
 - used `let` to keep method in it. used in _transactions-page_ component.
 - validated _build_ and _start_.
+
+## Lesson 04
+
+- changed navigation and transactions to use signal, used input() and output() for passing data and events. used in navigation, header, transactions-page, and app components.
+- added shared types for cards, accounts, transactions, currencies, and routes. src/app/data.ts, src/app/route.ts.
+- created reusable card-box and card-account-box components, used computed() to choose card labels and FontAwesome icons. src/app/features/card-box, src/app/features/card-account-box.
+- added card selection and displayed selected card accounts and balances, used signal and computed() for it. src/app/features/my-cards-page.
+- created transaction form, used FormsModule, ngModel, signals, and output events for entering transaction details and selecting cards. src/app/features/transaction-creation-page.
+- added transaction IDs, card/currency checks, balance checks, and income/outcome balance updates. used effect() and localStorage to save and load data. src/app/app.ts.
+- updated dashboard placeholders, added transaction-page header and button, improved responsive styles and selected states using CSS variables. src/app/features/dashboard-page, src/app/features/transactions-page, card and transaction-creation components.
