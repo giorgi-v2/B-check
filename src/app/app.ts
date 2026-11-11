@@ -3,16 +3,25 @@ import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { DashboardPage } from './features/dashboard-page/dashboard-page';
 import { MyCardsPage } from './features/my-cards-page/my-cards-page';
-import { TransactionsPage } from './features/transactions-page/transactions-page';
+import { TransactionsPage } from './features/transactions/transactions-page/transactions-page';
 import { RouteCode } from './route';
 import { Card, Transaction } from './data';
-import { TransactionCreationPage } from './features/transaction-creation-page/transaction-creation-page';
+import { TransactionCreationPage } from './features/transactions/transaction-creation-page/transaction-creation-page';
+import { TransactionsTable } from './features/transactions/transactions-table/transactions-table';
 
 const localStorageKey = 'data';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Footer, DashboardPage, MyCardsPage, TransactionsPage, TransactionCreationPage],
+  imports: [
+    Header,
+    Footer,
+    DashboardPage,
+    MyCardsPage,
+    TransactionsPage,
+    TransactionCreationPage,
+    TransactionsTable,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

@@ -1,9 +1,4 @@
 :host {
-  display: block;
-  width: calc(100% - 48px);
-  max-width: 1216px;
-  min-width: 0;
-  margin: 32px auto;
   color: var(--color-text);
   font-family: var(--font-body);
 }
@@ -11,6 +6,10 @@
 .content {
   display: grid;
   gap: 24px;
+}
+
+.content > :last-child:empty {
+  display: none;
 }
 
 .content_container {
@@ -155,11 +154,6 @@
 }
 
 @media (max-width: 600px) {
-  :host {
-    width: calc(100% - 32px);
-    margin-block: 24px;
-  }
-
   .content_container_title {
     font-size: 28px;
   }

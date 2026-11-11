@@ -1,0 +1,22 @@
+@let transactionsCount = transactions().length;
+
+<header class="transactions-page-header">
+  <div class="transactions-page-heading">
+    <h1 class="transactions-page-title">Transactions</h1>
+    <p class="transactions-page-description">Every payment. Every transfer. All in one place.</p>
+  </div>
+  <button class="transactions-add" type="button" (click)="onAddTransaction.emit()">
+    Add transaction
+  </button>
+</header>
+
+<section class="transactions-panel" aria-labelledby="transactions-table-title">
+  <header class="transactions-header">
+    <h2 id="transactions-table-title">All transactions</h2>
+    <span class="transactions-count">{{ transactionsCount }} results</span>
+  </header>
+  <ng-content select="app-transactions-table"></ng-content>
+  <footer class="transactions-footer">
+    Showing {{ transactionsCount }} of {{ transactionsCount }} transactions
+  </footer>
+</section>
