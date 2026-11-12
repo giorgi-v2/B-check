@@ -11,5 +11,5 @@ import { FormsModule } from '@angular/forms';
 export class CardSelect {
   public cards = input.required<Card[]>();
 
-  public selectedCardId = model.required<number | null>();
+  public selectedCardId = model.required<number | 'all'>();
 }

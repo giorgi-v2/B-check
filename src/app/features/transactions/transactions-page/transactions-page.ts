@@ -16,12 +16,12 @@ export class TransactionsPage {
 
   public onAddTransaction = output();
 
-  protected filterSelectedCardId = signal<number | null>(null);
+  protected filterSelectedCardId = signal<number | 'all'>('all');
 
   protected sortedTransactions = computed(() => {
     const filterSelectedCardId = this.filterSelectedCardId();
     return this.transactions()
       .sort((a, b) => b.date.getTime() - a.date.getTime())
-      .filter((x) => filterSelectedCardId === null || x.cardId === +filterSelectedCardId);
+      .filter((x) => filterSelectedCardId === 'all' || x.cardId === +filterSelectedCardId);
   });
 }
