@@ -101,3 +101,12 @@ All displayed financial information is fictional demo data.
 - created transaction form, used FormsModule, ngModel, signals, and output events for entering transaction details and selecting cards. src/app/features/transaction-creation-page.
 - added transaction IDs, card/currency checks, balance checks, and income/outcome balance updates. used effect() and localStorage to save and load data. src/app/app.ts.
 - updated dashboard placeholders, added transaction-page header and button, improved responsive styles and selected states using CSS variables. src/app/features/dashboard-page, src/app/features/transactions-page, card and transaction-creation components.
+
+## Lesson 05
+
+- Used `MyCardsPage` as the parent list and `CardBox` as the reusable child for each card. `src/app/features/my-cards-page`, `src/app/features/cards/card-box`.
+- Passed card data through `input.required<Card>()` and used an optional `input()` for the selected state. `src/app/features/cards/card-box`.
+- Emitted card clicks through `output()` so the parent can update the selected card and display its accounts. `src/app/features/cards/card-box`, `src/app/features/my-cards-page`.
+- Used `signal.update()` to add a transaction by creating a new array. `src/app/app.ts`.
+- Added the **All cards** dropdown with `model.required()` and two-way binding. Used `computed()` to filter transactions by card and display the newest first. `src/app/features/cards/card-select`, `src/app/features/transactions/transactions-page`.
+- Created a reusable `Box` component with `ng-content` and used it to display the recent transactions table on the Dashboard. `src/app/components/box`, `src/app/features/dashboard-page`.
