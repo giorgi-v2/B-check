@@ -1,0 +1,5 @@
+<select name="" id="" [(ngModel)]="selectedCardId">
+  @for (item of cards(); track $index) {
+    <option [value]="item.id">{{ item.type }} {{ item.name }}</option>
+  }
+</select>

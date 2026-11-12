@@ -9,13 +9,20 @@
     Add transaction
   </button>
 </header>
-
+<section>
+  <div>
+    <app-card-select [cards]="cards()" [(selectedCardId)]="filterSelectedCardId"></app-card-select>
+  </div>
+</section>
+<section>
+  <app-card-balance></app-card-balance>
+</section>
 <section class="transactions-panel" aria-labelledby="transactions-table-title">
   <header class="transactions-header">
     <h2 id="transactions-table-title">All transactions</h2>
     <span class="transactions-count">{{ transactionsCount }} results</span>
   </header>
-  <ng-content select="app-transactions-table"></ng-content>
+  <app-transactions-table [transactions]="sortedTransactions()"></app-transactions-table>
   <footer class="transactions-footer">
     Showing {{ transactionsCount }} of {{ transactionsCount }} transactions
   </footer>

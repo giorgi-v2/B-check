@@ -8,6 +8,7 @@ import { RouteCode } from './route';
 import { Card, Transaction } from './data';
 import { TransactionCreationPage } from './features/transactions/transaction-creation-page/transaction-creation-page';
 import { TransactionsTable } from './features/transactions/transactions-table/transactions-table';
+import { Box } from './components/box/box';
 
 const localStorageKey = 'data';
 
@@ -21,6 +22,7 @@ const localStorageKey = 'data';
     TransactionsPage,
     TransactionCreationPage,
     TransactionsTable,
+    Box,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { CardAccount } from '../../data';
+import { CardAccount } from '../../../data';
 
 @Component({
   imports: [],

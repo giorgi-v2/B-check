@@ -1,8 +1,9 @@
 import { Component, computed, input, output } from '@angular/core';
-import { Card } from '../../data';
+import { Card } from '../../../data';
+import { CardBalance } from '../card-balance/card-balance';
 
 @Component({
-  imports: [],
+  imports: [CardBalance],
   selector: 'app-card-box',
   styleUrl: './card-box.scss',
   templateUrl: './card-box.html',

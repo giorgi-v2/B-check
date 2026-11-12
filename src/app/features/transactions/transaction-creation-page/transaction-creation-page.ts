@@ -1,7 +1,7 @@
 import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { Card, Transaction } from '../../../data';
 import { FormsModule } from '@angular/forms';
-import { CardBox } from '../../card-box/card-box';
+import { CardBox } from '../../cards/card-box/card-box';
 
 @Component({
   imports: [FormsModule, CardBox],

@@ -6,7 +6,6 @@
   @switch (currentRoute()) {
     @case ('dashboard') {
       <app-dashboard-page [transactions]="transactions()"></app-dashboard-page>
-      <app-transactions-table [transactions]="transactions()"></app-transactions-table>
     }
     @case ('my-cards') {
       <app-my-cards-page [cards]="cards()"> </app-my-cards-page>
@@ -15,8 +14,8 @@
       <app-transactions-page
         [transactions]="transactions()"
         (onAddTransaction)="handleCurrentRouteChange('transaction-creation')"
+        [cards]="cards()"
       >
-        <app-transactions-table [transactions]="transactions()"></app-transactions-table>
       </app-transactions-page>
     }
     @case ('transaction-creation') {
