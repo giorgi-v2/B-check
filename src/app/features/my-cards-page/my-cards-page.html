@@ -3,7 +3,7 @@
     <h1 id="my-cards-title" class="my-cards-title">My cards</h1>
     <p class="my-cards-description">Your cards, balances and account details in one place.</p>
   </div>
-  <button class="my-cards-add" type="button">+ Add a card</button>
+  <button class="my-cards-add" type="button" (click)="showCardForm.set(true)">+ Add a card</button>
 
   @let _card = selectedCard();
 
@@ -24,5 +24,9 @@
         <p class="my-cards-empty">No accounts available for this card.</p>
       }
     </div>
+  }
+  @if (showCardForm()) {
+    <app-card-add> </app-card-add>
+    <button type="button" (click)="showCardForm.set(false)">Close</button>
   }
 </section>
