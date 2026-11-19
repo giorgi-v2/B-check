@@ -30,6 +30,10 @@
         <p class="my-cards-empty">No accounts available for this card.</p>
       }
     </div>
+    <button class="my-cards-add my-cards-remove" type="button" (click)="removeSelectedCard()">
+      <i class="fa-solid fa-trash" aria-hidden="true"></i>
+      Delete selected card
+    </button>
   }
   <dialog
     #cardDialog

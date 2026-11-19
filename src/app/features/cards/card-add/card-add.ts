@@ -32,7 +32,7 @@ export class CardAdd {
       alert('Please fill the blank space');
       return;
     }
-    let newId = 1;
+    let newId = Date.now();
     for (const card of this.cardsService.cards()) {
       if (card.id >= newId) {
         newId = card.id + 1;

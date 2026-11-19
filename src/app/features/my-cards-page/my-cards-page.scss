@@ -53,6 +53,15 @@
   }
 }
 
+.my-cards-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1 / -1;
+  justify-self: start;
+  gap: 12px;
+}
+
 .card-dialog {
   box-sizing: border-box;
   width: min(520px, calc(100% - 32px));
