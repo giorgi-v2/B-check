@@ -3,7 +3,13 @@
     <h1 id="my-cards-title" class="my-cards-title">My cards</h1>
     <p class="my-cards-description">Your cards, balances and account details in one place.</p>
   </div>
-  <button class="my-cards-add" type="button" (click)="showCardForm.set(true)">+ Add a card</button>
+  <button
+    class="my-cards-add"
+    type="button"
+    (click)="showCardForm.set(true); cardDialog.showModal()"
+  >
+    + Add a card
+  </button>
 
   @let _card = selectedCard();
 
@@ -25,8 +31,25 @@
       }
     </div>
   }
-  @if (showCardForm()) {
-    <app-card-add> </app-card-add>
-    <button type="button" (click)="showCardForm.set(false)">Close</button>
-  }
+  <dialog
+    #cardDialog
+    class="card-dialog"
+    aria-labelledby="card-dialog-title"
+    (close)="showCardForm.set(false)"
+  >
+    <header class="card-dialog-header">
+      <h2 id="card-dialog-title">Add a card</h2>
+      <button
+        class="card-dialog-close"
+        type="button"
+        aria-label="Close"
+        (click)="cardDialog.close()"
+      >
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </header>
+    @if (showCardForm()) {
+      <app-card-add></app-card-add>
+    }
+  </dialog>
 </section>

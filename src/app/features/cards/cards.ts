@@ -6,9 +6,22 @@ import { combineLatest } from 'rxjs';
 export class Cards {
   private readonly cardList = signal<Card[]>([]);
   readonly cards = this.cardList.asReadonly();
-  readonly cardCount = computed(() => this.cardList.length);
+  readonly cardCount = computed(() => this.cardList().length);
 
   addCard(card: Card) {
     this.cardList.update((cards) => [...cards, card]);
+  }
+  localCards(cards: Card[]) {
+    this.cardList.set(cards);
+  }
+  updateCard(updatedCard: Card) {
+    this.cardList.update((cards) =>
+      cards.map((card) => {
+        if (card.id === updatedCard.id) {
+          return updatedCard;
+        }
+        return card;
+      }),
+    );
   }
 }

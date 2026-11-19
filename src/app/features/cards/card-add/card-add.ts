@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CurrencyCode } from '../../../data';
+import { Card, CurrencyCode } from '../../../data';
+import { Cards } from '../cards';
 
 @Component({
   imports: [FormsModule],
@@ -15,6 +16,8 @@ export class CardAdd {
   protected cardExpirationDate = signal('');
   protected cardBalance = signal(0);
   protected cardCurrency = signal<CurrencyCode>('GEL');
+  protected cardProvider = signal<Card['provider']>('BOG');
+  protected cardType = signal<Card['type']>('visa');
 
   protected submitCard(): void {
     if (
@@ -22,14 +25,39 @@ export class CardAdd {
       !this.cardNumber() ||
       !this.cardCvv() ||
       !this.cardExpirationDate() ||
-      !this.cardBalance() ||
+      typeof this.cardBalance() !== 'number' ||
+      this.cardBalance() < 0 ||
       !this.cardCurrency()
     ) {
       alert('Please fill the blank space');
+      return;
     }
-    console.log(this.cardName());
-    console.log(this.cardBalance());
-    console.log(this.cardCurrency());
+    let newId = 1;
+    for (const card of this.cardsService.cards()) {
+      if (card.id >= newId) {
+        newId = card.id + 1;
+      }
+    }
+
+    const newCard: Card = {
+      id: newId,
+      name: this.cardName(),
+      provider: this.cardProvider(),
+      type: this.cardType(),
+      cardNumber: this.cardNumber(),
+      cardHolder: 'Alex Dune',
+      expirationDate: new Date(this.cardExpirationDate()),
+      cvv: this.cardCvv(),
+      accounts: [
+        {
+          id: 1,
+          amount: this.cardBalance(),
+          currency: this.cardCurrency(),
+        },
+      ],
+    };
+    this.cardsService.addCard(newCard);
   }
+
   private readonly cardsService = inject(Cards);
 }

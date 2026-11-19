@@ -1,4 +1,4 @@
-import { Component, effect, Signal, signal, WritableSignal } from '@angular/core';
+import { Component, effect, inject, Signal, signal, WritableSignal } from '@angular/core';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { DashboardPage } from './features/dashboard-page/dashboard-page';
@@ -9,6 +9,7 @@ import { Card, Transaction } from './data';
 import { TransactionCreationPage } from './features/transactions/transaction-creation-page/transaction-creation-page';
 import { TransactionsTable } from './features/transactions/transactions-table/transactions-table';
 import { Box } from './components/box/box';
+import { Cards } from './features/cards/cards';
 
 const localStorageKey = 'data';
 
@@ -35,75 +36,8 @@ export class App {
 
   protected transactions = signal<Transaction[]>([]);
 
-  protected cards = signal<Card[]>([
-    {
-      name: 'everyday debit',
-      id: 1,
-      provider: 'BOG',
-      type: 'visa',
-      cardNumber: '**** **** **** 0102',
-      cardHolder: 'Alex Dune',
-      expirationDate: new Date(2039, 7),
-      cvv: '***',
-      accounts: [
-        {
-          id: 1,
-          amount: 201,
-          currency: 'GEL',
-        },
-        {
-          id: 1,
-          amount: 98,
-          currency: 'USD',
-        },
-      ],
-    },
-    {
-      name: 'Travel card',
-      id: 2,
-      provider: 'TBC',
-      type: 'mastercard',
-      cardNumber: '**** **** **** 4765',
-      cardHolder: 'Alex Dune',
-      expirationDate: new Date(2039, 7),
-      cvv: '***',
-      accounts: [
-        {
-          id: 1,
-          amount: 201,
-          currency: 'GEL',
-        },
-        {
-          id: 1,
-          amount: 98,
-          currency: 'USD',
-        },
-      ],
-    },
-    {
-      name: 'Savings card',
-      id: 3,
-      provider: 'Credo',
-      type: 'visa',
-      cardNumber: '**** **** **** 0342',
-      cardHolder: 'Alex Dune',
-      expirationDate: new Date(2039, 7),
-      cvv: '***',
-      accounts: [
-        {
-          id: 1,
-          amount: 201,
-          currency: 'GEL',
-        },
-        {
-          id: 1,
-          amount: 98,
-          currency: 'USD',
-        },
-      ],
-    },
-  ]);
-
+  private readonly cardsService = inject(Cards);
+  protected readonly cards = this.cardsService.cards;
   protected dataSaverEffect = effect(() => {
     const transactions = this.transactions();
     const cards = this.cards();
@@ -127,7 +61,12 @@ export class App {
       this.transactions.set(parseToData.transactions);
     }
     if (parseToData.cards) {
-      this.cards.set(parseToData.cards);
+      this.cardsService.localCards(
+        parseToData.cards.map((card) => ({
+          ...card,
+          expirationDate: new Date(card.expirationDate),
+        })),
+      );
     }
   }
 
@@ -153,15 +92,26 @@ export class App {
       return;
     }
     this.transactions.update((transactions) => [...transactions, transaction]);
-    switch (transaction.type) {
-      case 'income':
-        cardAccount.amount += transaction.amount;
-        break;
-      case 'outcome':
-        cardAccount.amount -= transaction.amount;
-        break;
+    let newBalance = cardAccount.amount;
+
+    if (transaction.type === 'income') {
+      newBalance += transaction.amount;
+    } else {
+      newBalance -= transaction.amount;
     }
-    this.cards.update((cards) => [...cards.filter((x) => x.id !== transaction.cardId), card]);
+
+    const updatedCard: Card = {
+      ...card,
+      accounts: card.accounts.map((account) => {
+        if (account.currency === transaction.currency) {
+          return { ...account, amount: newBalance };
+        }
+
+        return account;
+      }),
+    };
+
+    this.cardsService.updateCard(updatedCard);
     this.handleCurrentRouteChange('transactions');
   }
 

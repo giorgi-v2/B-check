@@ -5,7 +5,7 @@
   </div>
   <div class="card-box-body">
     <span class="card-box-name">{{ _card.name }}</span>
-    <p class="card-box-number">{{ cardType() }} {{ _card.cardNumber }}</p>
+    <p class="card-box-number">{{ cardType() }} {{ _card.cardNumber.slice(-4) }}</p>
   </div>
   <svg
     class="card-box-check"
