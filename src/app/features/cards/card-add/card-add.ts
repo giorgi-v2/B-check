@@ -56,7 +56,12 @@ export class CardAdd {
         },
       ],
     };
-    this.cardsService.addCard(newCard);
+    const cardAdded = this.cardsService.addCard(newCard);
+
+    if (!cardAdded) {
+      alert('you are able to add maximum 5 cards');
+      return;
+    }
   }
 
   private readonly cardsService = inject(Cards);

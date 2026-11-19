@@ -3,9 +3,10 @@ import { Card } from '../../data';
 import { CardBox } from '../cards/card-box/card-box';
 import { CardAccountBox } from '../cards/card-account-box/card-account-box';
 import { CardAdd } from '../cards/card-add/card-add';
+import { CardDemo } from '../cards/card-demo/card-demo';
 
 @Component({
-  imports: [CardBox, CardAccountBox, CardAdd],
+  imports: [CardBox, CardAccountBox, CardAdd, CardDemo],
   selector: 'app-my-cards-page',
   styleUrl: './my-cards-page.scss',
   templateUrl: './my-cards-page.html',

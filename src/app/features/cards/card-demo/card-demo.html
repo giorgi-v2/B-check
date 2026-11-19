@@ -1,0 +1,23 @@
+<section aria-labelledby="card-demo-title">
+  <h2 id="card-demo-title">Test cards</h2>
+  <p aria-live="polite">Cards: {{ cardsCount() }}</p>
+
+  <app-card-add></app-card-add>
+
+  <div class="card-demo-list">
+    @for (card of cards(); track card.id) {
+      <article class="card-demo-item">
+        <app-card-box [card]="card"></app-card-box>
+        <div class="card-demo-accounts">
+        @for (account of card.accounts; track $index) {
+          <app-card-account-box [account]="account"></app-card-account-box>
+        } @empty {
+          <p>No accounts available.</p>
+        }
+        </div>
+      </article>
+    } @empty {
+      <p>No test cards added yet.</p>
+    }
+  </div>
+</section>
