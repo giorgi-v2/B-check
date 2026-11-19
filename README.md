@@ -110,3 +110,14 @@ All displayed financial information is fictional demo data.
 - Used `signal.update()` to add a transaction by creating a new array. `src/app/app.ts`.
 - Added the **All cards** dropdown with `model.required()` and two-way binding. Used `computed()` to filter transactions by card and display the newest first. `src/app/features/cards/card-select`, `src/app/features/transactions/transactions-page`.
 - Created a reusable `Box` component with `ng-content` and used it to display the recent transactions table on the Dashboard. `src/app/components/box`, `src/app/features/dashboard-page`.
+
+## Lesson 06
+
+- created Cards service with providedIn: 'root', private signal for cards, public asReadonly() signal, and computed() card counter. src/app/features/cards/cards.ts.
+- added card creation, balance updates, deletion, and input validation. used update(), map(), filter(), and spread syntax for immutable updates. src/app/features/cards/cards.ts.
+- used inject() to access the shared service in app, card-add, and my-cards-page. src/app/app.ts, src/app/features/cards/card-add/card-add.ts, src/app/features/my-cards-page/my-cards-page.ts.
+- connected the card form to the service and displayed user-added cards in My Cards and transaction selection. used FormsModule, ngModel, and signals. src/app/features/cards/card-add, src/app/app.ts, src/app/app.html.
+- created a separate demo with local providers: [Cards]. chose root for sharing cards across the app and a local provider for independent test cards. src/app/features/cards/card-demo/card-demo.ts.
+- created MAX_CARDS InjectionToken and provided the limit with useValue: 5. used inject() to read the limit and prevent adding more than five cards per service instance. src/app/features/cards/cards.ts, src/app/app.config.ts.
+- kept effect() and localStorage for saving and loading shared cards and transactions. src/app/app.ts.
+- added a centered dialog for the card form, masked card numbers to show the last four digits, reused card components in the demo, and styled the delete button using existing CSS variables. src/app/features/my-cards-page, src/app/features/cards/card-box/card-box.html, src/app/features/cards/card-demo.
