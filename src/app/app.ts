@@ -10,6 +10,8 @@ import { TransactionCreationPage } from './features/transactions/transaction-cre
 import { TransactionsTable } from './features/transactions/transactions-table/transactions-table';
 import { Box } from './components/box/box';
 import { Cards } from './features/cards/cards';
+import { Transactions } from './features/transactions/transactions';
+import { readonly } from '@angular/forms/signals';
 
 const localStorageKey = 'data';
 
@@ -34,7 +36,8 @@ export class App {
 
   protected currentRoute: WritableSignal<RouteCode> = signal('dashboard');
 
-  protected transactions = signal<Transaction[]>([]);
+  private readonly transactionService = inject(Transactions);
+  protected readonly transactions = this.transactionService.transactions;
 
   private readonly cardsService = inject(Cards);
   protected readonly cards = this.cardsService.cards;
@@ -58,7 +61,7 @@ export class App {
       parseToData.transactions.forEach((element) => {
         element.date = new Date(element.date);
       });
-      this.transactions.set(parseToData.transactions);
+      this.transactionService.restore(parseToData.transactions);
     }
     if (parseToData.cards) {
       this.cardsService.localCards(
@@ -91,7 +94,7 @@ export class App {
       alert('There is not enough balance on account');
       return;
     }
-    this.transactions.update((transactions) => [...transactions, transaction]);
+    this.transactionService.add(transaction);
     let newBalance = cardAccount.amount;
 
     if (transaction.type === 'income') {
