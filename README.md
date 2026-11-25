@@ -121,3 +121,11 @@ All displayed financial information is fictional demo data.
 - created MAX_CARDS InjectionToken and provided the limit with useValue: 5. used inject() to read the limit and prevent adding more than five cards per service instance. src/app/features/cards/cards.ts, src/app/app.config.ts.
 - kept effect() and localStorage for saving and loading shared cards and transactions. src/app/app.ts.
 - added a centered dialog for the card form, masked card numbers to show the last four digits, reused card components in the demo, and styled the delete button using existing CSS variables. src/app/features/my-cards-page, src/app/features/cards/card-box/card-box.html, src/app/features/cards/card-demo.
+
+## Lesson 07
+
+- Added Angular Router navigation for Dashboard, My Cards, and Transactions, with active links and a nested transaction form. `src/app/app.routes.ts`, `src/app/components/navigation`, `src/app/features/transactions/transaction-layout`.
+- Added card selection through `/my-cards/:id` and transaction filtering through `/transactions?cardId=...`. `src/app/features/my-cards-page`, `src/app/features/transactions/transactions-page`.
+- Added a redirect from `/` to `/dashboard` and a 404 page for unknown URLs. `src/app/app.routes.ts`, `src/app/features/not-found-page`.
+- Added a guard that redirects to My Cards when there are no saved cards, and lazy-loaded the transaction form. `src/app/features/transactions/has-cards.guard.ts`, `src/app/app.routes.ts`.
+- Moved transaction creation and balance updates into the shared `Transactions` service. `src/app/features/transactions/transactions.ts`.
