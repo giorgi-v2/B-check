@@ -5,13 +5,17 @@
     <h1 class="transactions-page-title">Transactions</h1>
     <p class="transactions-page-description">Every payment. Every transfer. All in one place.</p>
   </div>
-  <button class="transactions-add" type="button" (click)="onAddTransaction.emit()">
+  <button class="transactions-add" type="button" routerLink="/transactions/new">
     Add transaction
   </button>
 </header>
 <section>
   <div>
-    <app-card-select [cards]="cards()" [(selectedCardId)]="filterSelectedCardId"></app-card-select>
+    <app-card-select
+      [cards]="cards()"
+      [selectedCardId]="filterSelectedCardId()"
+      (selectedCardIdChange)="changeCardFilter($event)"
+    ></app-card-select>
   </div>
 </section>
 <section>
@@ -20,10 +24,10 @@
 <section class="transactions-panel" aria-labelledby="transactions-table-title">
   <header class="transactions-header">
     <h2 id="transactions-table-title">All transactions</h2>
-    <span class="transactions-count">{{ transactionsCount }} results</span>
+    <span class="transactions-count">{{ sortedTransactions().length }} results</span>
   </header>
   <app-transactions-table [transactions]="sortedTransactions()"></app-transactions-table>
   <footer class="transactions-footer">
-    Showing {{ transactionsCount }} of {{ transactionsCount }} transactions
+    Showing {{ sortedTransactions().length }} of {{ transactionsCount }} transactions
   </footer>
 </section>

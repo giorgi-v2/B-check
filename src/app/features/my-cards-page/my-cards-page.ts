@@ -5,6 +5,7 @@ import { CardAccountBox } from '../cards/card-account-box/card-account-box';
 import { CardAdd } from '../cards/card-add/card-add';
 import { CardDemo } from '../cards/card-demo/card-demo';
 import { Cards } from '../cards/cards';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [CardBox, CardAccountBox, CardAdd, CardDemo],
@@ -13,13 +14,24 @@ import { Cards } from '../cards/cards';
   templateUrl: './my-cards-page.html',
 })
 export class MyCardsPage {
-  public cards = input.required<Card[]>();
+  protected readonly cards = inject(Cards).cards;
   protected showCardForm = signal(false);
 
-  protected selectedCardId = signal<number | undefined>(undefined);
-  protected selectedCard = computed(
-    () => this.cards().find((card) => card.id === this.selectedCardId()) ?? this.cards()[0],
-  );
+  readonly id = input<string>();
+  private readonly router = inject(Router);
+
+  protected selectedCard = computed(() => {
+    const id = this.id();
+
+    if (id === undefined) {
+      return this.cards()[0];
+    }
+
+    return this.cards().find((card) => String(card.id) === id);
+  });
+  protected openCard(id: number) {
+    void this.router.navigate(['/my-cards', id]);
+  }
   private readonly cardsService = inject(Cards);
 
   protected removeSelectedCard() {
@@ -28,6 +40,8 @@ export class MyCardsPage {
       return;
     }
     this.cardsService.removeCard(card.id);
-    this.selectedCardId.set(undefined);
+    if (this.id() !== undefined) {
+      void this.router.navigate(['/my-cards'], { replaceUrl: true });
+    }
   }
 }

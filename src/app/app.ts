@@ -6,27 +6,18 @@ import { MyCardsPage } from './features/my-cards-page/my-cards-page';
 import { TransactionsPage } from './features/transactions/transactions-page/transactions-page';
 import { RouteCode } from './route';
 import { Card, Transaction } from './data';
-import { TransactionCreationPage } from './features/transactions/transaction-creation-page/transaction-creation-page';
 import { TransactionsTable } from './features/transactions/transactions-table/transactions-table';
 import { Box } from './components/box/box';
 import { Cards } from './features/cards/cards';
 import { Transactions } from './features/transactions/transactions';
 import { readonly } from '@angular/forms/signals';
+import { RouterOutlet } from '@angular/router';
 
 const localStorageKey = 'data';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    Header,
-    Footer,
-    DashboardPage,
-    MyCardsPage,
-    TransactionsPage,
-    TransactionCreationPage,
-    TransactionsTable,
-    Box,
-  ],
+  imports: [Header, Footer, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -74,48 +65,9 @@ export class App {
   }
 
   protected createTransaction(transaction: Transaction) {
-    if (this.transactions().length > 0) {
-      const newId = Math.max(...this.transactions().map((x) => x.id)) + 1;
-      transaction.id = newId;
-    } else {
-      transaction.id = 1;
+    if (this.transactionService.createTransaction(transaction)) {
+      this.handleCurrentRouteChange('transactions');
     }
-    const card = this.cards().find((x) => x.id === transaction.cardId);
-    if (!card) {
-      alert('we cant create a transaction');
-      return;
-    }
-    const cardAccount = card.accounts.find((x) => x.currency === transaction.currency);
-    if (!cardAccount) {
-      alert('your card does not support this currency');
-      return;
-    }
-    if (transaction.type === 'outcome' && transaction.amount > cardAccount.amount) {
-      alert('There is not enough balance on account');
-      return;
-    }
-    this.transactionService.add(transaction);
-    let newBalance = cardAccount.amount;
-
-    if (transaction.type === 'income') {
-      newBalance += transaction.amount;
-    } else {
-      newBalance -= transaction.amount;
-    }
-
-    const updatedCard: Card = {
-      ...card,
-      accounts: card.accounts.map((account) => {
-        if (account.currency === transaction.currency) {
-          return { ...account, amount: newBalance };
-        }
-
-        return account;
-      }),
-    };
-
-    this.cardsService.updateCard(updatedCard);
-    this.handleCurrentRouteChange('transactions');
   }
 
   protected handleCurrentRouteChange(route: RouteCode) {

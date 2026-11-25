@@ -1,8 +1,9 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { TransactionsTable } from '../transactions/transactions-table/transactions-table';
 import { Transaction } from '../../data';
 import { CardBalance } from '../cards/card-balance/card-balance';
 import { Box } from '../../components/box/box';
+import { Transactions } from '../transactions/transactions';
 
 @Component({
   imports: [TransactionsTable, CardBalance, Box],
@@ -11,7 +12,7 @@ import { Box } from '../../components/box/box';
   templateUrl: './dashboard-page.html',
 })
 export class DashboardPage {
-  public transactions = input.required<Transaction[]>();
+  protected readonly transactions = inject(Transactions).transactions;
 
   protected last4Transactions = computed(() => {
     return this.transactions()

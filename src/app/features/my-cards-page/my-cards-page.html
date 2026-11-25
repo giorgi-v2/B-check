@@ -12,13 +12,16 @@
   </button>
 
   @let _card = selectedCard();
+  @if (id() !== undefined && !_card) {
+    <p class="my-cards-empty">Your card was not found</p>
+  }
 
   <div class="my-cards-list">
     @for (card of cards(); track card.id) {
       <app-card-box
         [card]="card"
         [selected]="card.id === _card?.id"
-        (onClick)="selectedCardId.set(card.id)"
+        (onClick)="openCard(card.id)"
       ></app-card-box>
     }
   </div>

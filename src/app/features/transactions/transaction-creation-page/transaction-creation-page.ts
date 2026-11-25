@@ -1,7 +1,10 @@
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { Card, Transaction } from '../../../data';
 import { FormsModule } from '@angular/forms';
 import { CardBox } from '../../cards/card-box/card-box';
+import { Router } from '@angular/router';
+import { Cards } from '../../cards/cards';
+import { Transactions } from '../transactions';
 
 @Component({
   imports: [FormsModule, CardBox],
@@ -10,9 +13,9 @@ import { CardBox } from '../../cards/card-box/card-box';
   templateUrl: './transaction-creation-page.html',
 })
 export class TransactionCreationPage {
-  public cards = input.required<Card[]>();
-
-  public onTransactionCreate = output<Transaction>();
+  protected readonly cards = inject(Cards).cards;
+  private readonly transactionService = inject(Transactions);
+  private readonly router = inject(Router);
 
   protected place = signal<Transaction['place']>(undefined);
   protected type = signal<Transaction['type']>('outcome');
@@ -28,7 +31,7 @@ export class TransactionCreationPage {
       alert('please choose a card');
       return;
     }
-    this.onTransactionCreate.emit({
+    const transaction: Transaction = {
       id: 0,
       type: this.type(),
       place: this.place(),
@@ -40,6 +43,10 @@ export class TransactionCreationPage {
       cardName: selectedCard.name,
       cardNumberLast4Digets: selectedCard?.cardNumber,
       status: 'completed',
-    });
+    };
+
+    if (this.transactionService.createTransaction(transaction)) {
+      this.router.navigate(['/transactions']);
+    }
   }
 }
